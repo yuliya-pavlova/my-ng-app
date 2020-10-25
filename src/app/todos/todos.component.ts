@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import {Todo} from '../app.component';
+import { Component, OnInit } from '@angular/core';
+import { TodosService } from '../shared/todos.service';
 
 @Component({
   selector: 'app-todos',
@@ -8,11 +8,16 @@ import {Todo} from '../app.component';
 })
 export class TodosComponent implements OnInit {
 
-  @Input() todos: Todo[] =[]
-
-  constructor() { }
+  constructor(public todosService: TodosService) { }
 
   ngOnInit(): void {
   }
 
+  onChange(id: number) {
+    this.todosService.onToggle(id)
+  }
+
+  removeTodo(id: number) {
+    this.todosService.removeTodo(id)
+  }
 }
